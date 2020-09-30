@@ -63,4 +63,26 @@ public class CalculatorTest {
                 "7,8,9") == 45;
     }
 
+    @Test
+    public void testOtherDelimiters() {
+        Calculator calc = new Calculator();
+        assert calc.Add("1\n" +
+                "2\n" +
+                "3\n" +
+                "4") == 10;
+
+
+        assert calc.Add("//;\n" +
+                "1\n" +
+                "2;5\n" +
+                "3;6\n" +
+                "4\n" +
+                "7;8;9") == 45;
+
+        assert calc.Add("//%%\n" +
+                "1%%\n" +
+                "2%%5\n" +
+                "3%%6\n" ) == 17;
+    }
+
 }
