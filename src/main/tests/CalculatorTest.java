@@ -20,9 +20,6 @@ public class CalculatorTest {
         int sum4 = calc.Add("4,2000000");
         assert sum4 == 2000004;
 
-        // Test for Negative numbers
-        int sum5 = calc.Add("-1,-2");
-        assert sum5 == -3;
     }
 
     @Test
@@ -84,5 +81,27 @@ public class CalculatorTest {
                 "2%%5\n" +
                 "3%%6\n" ) == 17;
     }
+
+    @Test
+    public void testNegativesNotAllowed(){
+        Calculator calc = new Calculator();
+        // Test for Negative numbers
+        try {
+            assert calc.Add("-1,-2") == -3;
+        } catch (IllegalArgumentException e) {
+            assert e.getMessage().contains("negatives not allowed -1, -2");
+        }
+
+        try {
+            assert calc.Add("//%%\n" +
+                    "1%%\n" +
+                    "2%%-5\n" +
+                    "3%%6\n" ) == 12;
+        } catch (IllegalArgumentException e) {
+            assert e.getMessage().contains("negatives not allowed -5");
+        }
+    }
+
+
 
 }
