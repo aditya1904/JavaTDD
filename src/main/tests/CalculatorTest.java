@@ -25,10 +25,12 @@ public class CalculatorTest {
         assert sum5 == -3;
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void throwExceptionWhenMoreThanTwoNumbers(){
+    @Test
+    public void calculateWhenMoreThanTwoNumbers(){
         Calculator calc = new Calculator();
-        calc.Add("1,2,3");
+        assert calc.Add("1,2,3") == 6;
+        assert calc.Add("4,48,3,73,1,79,77,49,63,16") == 413;
+        assert calc.Add("1,2,3,5,10") == 21;
     }
 
 }

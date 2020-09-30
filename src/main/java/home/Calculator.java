@@ -1,21 +1,20 @@
 package home;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 public class Calculator {
 
-//  The method can take up to two numbers, separated by commas, and will return their sum.
-//  for example “” or “1” or “1,2” as inputs.
-//  (for an empty string it will return 0)
+//    Allow the Add method to handle an unknown amount of numbers
     public int Add(String numbers) {
         if (isNullOrEmpty(numbers))
             return 0;
-        if (numbers.split(",").length > 2) {
-            throw new IllegalArgumentException("More than 2 numbers. Cannot Compute");
-        }
-        int sum = 0;
-        for (String num : numbers.split(",")) {
-            sum += Integer.parseInt(num);
-        }
-        return sum;
+        Optional<Integer> sum = Arrays.stream(numbers.split(","))
+                .map(Integer::parseInt)
+                .reduce((x, y) -> x + y);
+        return sum.orElse(0);
     }
 
     private boolean isNullOrEmpty(String str) {
