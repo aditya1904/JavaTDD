@@ -21,7 +21,9 @@ public class Calculator {
         List<Integer> negatives = integers.stream().filter(num -> (num < 0)).collect(Collectors.toList());
 
         if (negatives.isEmpty()) {
-            Optional<Integer> sum = integers.stream().reduce((x, y) -> x + y);
+            Optional<Integer> sum = integers.stream()
+                    .filter(num -> num <= 1000)
+                    .reduce((x, y) -> x + y);
             return sum.orElse(0);
         } else {
             throw new IllegalArgumentException("negatives not allowed " + negatives.stream()

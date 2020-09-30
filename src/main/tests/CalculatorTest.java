@@ -102,6 +102,28 @@ public class CalculatorTest {
         }
     }
 
+    @Test
+    public void skipMoreThan1000() {
+        Calculator calc = new Calculator();
+        assert calc.Add("1\n" +
+                "2\n" +
+                "3\n" +
+                "4") == 10;
+
+
+        assert calc.Add("//;\n" +
+                "1\n" +
+                "2;5\n" +
+                "3;6000\n" +
+                "4\n" +
+                "7;8;9") == 39;
+
+        assert calc.Add("//*\n" +
+                "1*\n" +
+                "2*1000\n" +
+                "3*6\n" ) == 1012;
+    }
+
 
 
 }
