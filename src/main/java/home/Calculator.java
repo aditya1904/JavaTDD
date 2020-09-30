@@ -11,7 +11,8 @@ public class Calculator {
     public int Add(String numbers) {
         if (isNullOrEmpty(numbers))
             return 0;
-        Optional<Integer> sum = Arrays.stream(numbers.split(","))
+        Optional<Integer> sum = Arrays.stream(numbers.split("[,|\n]"))
+                .filter(str -> !isNullOrEmpty(str))
                 .map(Integer::parseInt)
                 .reduce((x, y) -> x + y);
         return sum.orElse(0);

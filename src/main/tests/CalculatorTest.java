@@ -31,6 +31,36 @@ public class CalculatorTest {
         assert calc.Add("1,2,3") == 6;
         assert calc.Add("4,48,3,73,1,79,77,49,63,16") == 413;
         assert calc.Add("1,2,3,5,10") == 21;
+        assert calc.Add("1\n" +
+                "2,3") == 6;
+    }
+
+    @Test
+    public void calculateWhenNumbersOnNewlines() {
+        Calculator calc = new Calculator();
+        // One New Line
+        assert calc.Add("1\n" +
+                "2,3") == 6;
+
+        // Multiple New Lines
+        assert calc.Add("1\n" +
+                "2\n" +
+                "3\n" +
+                "4") == 10;
+
+        // Start with a new line
+        assert calc.Add("\n" +
+                "1\n" +
+                "2\n" +
+                "3\n" +
+                "4") == 10;
+
+        // Multiple numbers on multiple lines
+        assert calc.Add("1\n" +
+                "2,5\n" +
+                "3,6\n" +
+                "4\n" +
+                "7,8,9") == 45;
     }
 
 }
