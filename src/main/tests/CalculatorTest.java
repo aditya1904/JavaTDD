@@ -154,6 +154,32 @@ public class CalculatorTest {
                 "3*6000\n" +
                 "4\n" +
                 "7*8;9") == 39;
+
+        assert calc.Add("//[;]\n" +
+                "1\n" +
+                "2;5\n" +
+                "3;6000\n" +
+                "4\n" +
+                "7;8;9") == 39;
+    }
+
+    @Test
+    public void testMultipleDelimitersMoreThanOneLength(){
+        Calculator calc = new Calculator();
+
+        assert calc.Add("//[;;][***]\n" +
+                "1\n" +
+                "2;;5\n" +
+                "3***6000\n" +
+                "4\n" +
+                "7***8;;9") == 39;
+
+        assert calc.Add("//[;;;;]\n" +
+                "1\n" +
+                "2;;;;5\n" +
+                "3;;;;6000\n" +
+                "4\n" +
+                "7;;;;8;;;;9") == 39;
     }
 
 }
