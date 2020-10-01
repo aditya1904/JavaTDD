@@ -12,7 +12,7 @@ public class Calculator {
             return 0;
         String delim = findDelimiter(numbers);
         List<Integer> integers = Arrays.stream(numbers.
-                replaceAll("//" + delim, "").
+                replaceAll("^//.*\n", "").
                 split("[" + delim + "|\n]"))
                 .filter(str -> !isNullOrEmpty(str))
                 .map(Integer::parseInt)
@@ -31,14 +31,15 @@ public class Calculator {
         }
     }
 
-    private String findDelimiter(String numbers) {
-        String delimiter;
+    public String findDelimiter(String numbers) {
+        String delimiterRegex;
         if (numbers.startsWith("//")) {
-            delimiter = numbers.split("\n")[0].replaceAll("//", "");
+            String delimiterLine = numbers.split("\n")[0].replaceAll("//", "");
+            delimiterRegex = String.join("|", delimiterLine.split("]\\["));
         } else {
-            delimiter = ",";
+            delimiterRegex = ",";
         }
-        return delimiter;
+        return delimiterRegex;
     }
 
     private boolean isNullOrEmpty(String str) {

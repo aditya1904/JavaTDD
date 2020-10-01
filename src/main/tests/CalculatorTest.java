@@ -17,8 +17,8 @@ public class CalculatorTest {
         // Test for 2 numbers
         int sum3 = calc.Add("1,2");
         assert sum3 == 3;
-        int sum4 = calc.Add("4,2000000");
-        assert sum4 == 2000004;
+        int sum4 = calc.Add("4,200");
+        assert sum4 == 204;
 
     }
 
@@ -124,6 +124,36 @@ public class CalculatorTest {
                 "3*6\n" ) == 1012;
     }
 
+    @Test
+    public void testFindDelimiter(){
+        Calculator calc = new Calculator();
+        assert calc.findDelimiter("//;\n" +
+                "1\n" +
+                "2;5\n" +
+                "3;6000\n" +
+                "4\n" +
+                "7;8;9").equals(";");
 
+        assert calc.findDelimiter("//[;][*]\n" +
+                "1\n" +
+                "2;5\n" +
+                "3;6000\n" +
+                "4\n" +
+                "7;8;9").equals("[;|*]");
+    }
+
+    @Test
+    public void testMultipleDelimiters(){
+        Calculator calc = new Calculator();
+        assert calc.Add("//[;][,]\n" +
+                "1;2,3") == 6;
+
+        assert calc.Add("//[;][*]\n" +
+                "1\n" +
+                "2;5\n" +
+                "3*6000\n" +
+                "4\n" +
+                "7*8;9") == 39;
+    }
 
 }
