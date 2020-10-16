@@ -1,5 +1,3 @@
-package Cucumber;
-
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
@@ -9,5 +7,5 @@ import org.junit.runner.RunWith;
     features = {"classpath:features/"},
     plugin = {"pretty", "json:target/reports/json/calculator.json"}
 )
-public class CalculatorRunFeatures {
+public class CalculatorCucumberTest {
 }
